@@ -1,5 +1,5 @@
-% NOM_ETUDIANT_1 (MATRICULE_1)
-% NOM_ETUDIANT_2 (MATRICULE_2)
+% KARAKI 2402594
+% LUQUET (MATRICULE)
 
 include "globals.mzn"; 
 
@@ -37,7 +37,7 @@ var int: fin_projet;
 % Partie étudiant
 %-----------------------------------------------------------------------------%
 
-
+solve minimize m;
 %-----------------------------------------------------------------------------%
 
 output [
