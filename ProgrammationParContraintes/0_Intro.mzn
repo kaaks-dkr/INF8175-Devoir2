@@ -18,7 +18,7 @@ array[1..4] of var 1..9: chiffres;
 %-----------------------------------------------------------------------------%
 
 % Variable à minimiser
-var int: p;
+var int: p = chiffres[2] * chiffres[3] * chiffres[4];
 
 
 %-----------------------------------------------------------------------------%
@@ -35,7 +35,7 @@ constraint chiffres[3] < chiffres[4]; %5
 constraint chiffres[2] > chiffres[4]; %6
 constraint sum(chiffres) > 15; %7
 constraint alldifferent(chiffres); %3
-solve minimize (chiffres[2] * chiffres[3] * chiffres[4]); %8
+solve minimize p;
 %-----------------------------------------------------------------------------%
 
 output [

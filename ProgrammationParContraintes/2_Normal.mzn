@@ -31,13 +31,14 @@ array[1..n] of var 1..m: fin_tache; % Fin des tâches
 %-----------------------------------------------------------------------------%
 
 % Fin du projet
-var int: fin_projet;
+var int: fin_projet = maximum(fin_tache);
 
 %-----------------------------------------------------------------------------%
 % Partie étudiant
 %-----------------------------------------------------------------------------%
-
-solve minimize m;
+constraint forall(i in 1..n)(debut_tache[i] + duree_tache[i] = fin_tache[i]);
+constraint cumulative(debut_tache, duree_tache,ressource_tache, limite);
+solve minimize fin_projet;
 %-----------------------------------------------------------------------------%
 
 output [
