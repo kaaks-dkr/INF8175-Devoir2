@@ -24,9 +24,13 @@ array [1..n] of var 1..n: assignation_role;
 %-----------------------------------------------------------------------------%
 % Partie étudiant
 %-----------------------------------------------------------------------------%
-
-
-
+% Contrainte 1 : Attribuer un et un seul rôle à chaque acteur
+constraint all_different(assignation_role);
+% Contrainte 2 : Chaque acteur a un costume Unique
+constraint alldifferent([choix_costume[assignation_role[i], i] | i in 1..n]);
+% Contrainte 3 : Deux acteur ne doivent pas etre adjacent
+constraint forall(i in 1..n-1)(abs(assignation_role[i] - assignation_role[i+1]) > 1); 
+solve satisfy;
 %-----------------------------------------------------------------------------%
 
 output	
