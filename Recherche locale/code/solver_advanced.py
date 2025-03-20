@@ -1,3 +1,6 @@
+# KARAKI 2402594
+# LUQUET 2402133
+
 from schedule import Schedule
 import random
 import math
