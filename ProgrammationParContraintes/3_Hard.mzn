@@ -1,5 +1,5 @@
-% KARAKI 2402594
-% LUQUET (MATRICULE)
+% NOM_ETUDIANT_1 (MATRICULE_1)
+% NOM_ETUDIANT_2 (MATRICULE_2)
 
 include "globals.mzn"; 
 
@@ -50,7 +50,6 @@ var int: temps_trajet;
 %-----------------------------------------------------------------------------%
 
 
-solve minimize temps_trajet;
 %-----------------------------------------------------------------------------%
 
 output [

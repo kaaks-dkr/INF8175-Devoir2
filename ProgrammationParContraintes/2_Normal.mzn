@@ -1,5 +1,5 @@
-% KARAKI 2402594
-% LUQUET (MATRICULE)
+% NOM_ETUDIANT_1 (MATRICULE_1)
+% NOM_ETUDIANT_2 (MATRICULE_2)
 
 include "globals.mzn"; 
 
@@ -31,14 +31,13 @@ array[1..n] of var 1..m: fin_tache; % Fin des tâches
 %-----------------------------------------------------------------------------%
 
 % Fin du projet
-var int: fin_projet = maximum(fin_tache);
+var int: fin_projet;
 
 %-----------------------------------------------------------------------------%
 % Partie étudiant
 %-----------------------------------------------------------------------------%
-constraint forall(i in 1..n)(debut_tache[i] + duree_tache[i] = fin_tache[i]);
-constraint cumulative(debut_tache, duree_tache,ressource_tache, limite);
-solve minimize fin_projet;
+
+
 %-----------------------------------------------------------------------------%
 
 output [
