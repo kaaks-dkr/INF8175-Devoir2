@@ -49,6 +49,39 @@ var int: temps_trajet;
 % Partie étudiant
 %-----------------------------------------------------------------------------%
 
+% Contrainte 1 : Le trajet doit visiter toutes les villes une seule fois 
+% et revenir à la première ville 
+constraint circuit(circuit_tournee);
+constraint alldifferent(chemin_tournee);
+
+% Contrainte 2 : Respect de la fenêtre de temps pour chaque ville
+constraint forall(i in 1..n) (
+    fenetre_arrivee[i, 1] <= cumul_temps[i] + temps_attente[i] /\ cumul_temps[i] + temps_attente[i] <= fenetre_arrivee[i, 2]
+);
+
+% Contrainte 3 : Definiton du temps de trajet total
+constraint temps_trajet = max(cumul_temps);
+% Contrainte 4 : Definiton du temps d'attente 
+constraint forall(i in 1..n) (
+    temps_attente[i] = max(0, fenetre_arrivee[i, 1] - cumul_temps[i])
+);
+
+% Contrainte 5 : Definiton du temps cumulatif pour chaque ville
+% Pour la ville 1, le temps cumulé est fixé à 0
+constraint cumul_temps[1] = 0;
+% Pour les autres ville, le temps cumulé est celui de la ville prédécesseur 
+% plus la distance du trajet entre la précédente et la ville actuelle
+constraint forall(i in 2..n)(
+    cumul_temps[i] = cumul_temps[circuit_tournee[i]] + distance[circuit_tournee[i], i]
+);
+
+% Contrainte 6 : Pas plus de deux villes peuvent démarrer en même temps
+% On s'assure qu'il y a au maximum deux occurrences dans le tableau.
+constraint forall(i in 1..n) (
+        count(cumul_temps, cumul_temps[i]) <= 2
+    );
+
+solve minimize temps_trajet;
 
 %-----------------------------------------------------------------------------%
 
